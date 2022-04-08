@@ -1,7 +1,7 @@
 {
-    "name": "miladimos/package-skeleton",
-    "description": "test description",
-    "homepage": "https://github.com/miladimos/package-skeleton",
+    "name": "laravelir/cart",
+    "description": "shop cart package",
+    "homepage": "https://github.com/miladimos/cart",
     "type": "library",
     "version": "0.1.0",
     "keywords": [
@@ -16,13 +16,13 @@
         {
             "name": "miladimos",
             "email": "miladimos@outlook.com",
-            "role": "maintaner",
+            "role": "maintainer",
             "homepage": "https://github.com/miladimos"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Vendor\\Package\\": "src/"
+            "Laravelir\\Cart\\": "src/"
         },
         "files": [
             "./src/helpers.php"
@@ -30,16 +30,16 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Vendor\\Package\\Tests\\": "tests"
+            "Laravelir\\Cart\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Vendor\\Package\\Providers\\PackageServiceProvider"
+                "Laravelir\\Cart\\Providers\\CartServiceProvider"
             ],
             "aliases": {
-                "Package": "Vendor\\Package\\Facades\\PackageFacade"
+                "Cart": "Laravelir\\Cart\\Facades\\CartFacade"
             }
         }
     },

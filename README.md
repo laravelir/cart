@@ -1,9 +1,9 @@
-- [![Starts](https://img.shields.io/github/stars/miladimos/package-skeleton?style=flat&logo=github)](https://github.com/miladimos/package-skeleton/forks)
-- [![Forks](https://img.shields.io/github/forks/miladimos/package-skeleton?style=flat&logo=github)](https://github.com/miladimos/package-skeleton/stargazers)
-  [![Total Downloads](https://img.shields.io/packagist/dt/miladimos/laravel-.svg?style=flat-square)](https://packagist.org/packages/miladimos/laravel-)
+- [![Starts](https://img.shields.io/github/stars/laravelir/cart?style=flat&logo=github)](https://github.com/laravelir/cart/forks)
+- [![Forks](https://img.shields.io/github/forks/laravelir/cart?style=flat&logo=github)](https://github.com/laravelir/cart/stargazers)
+  [![Total Downloads](https://img.shields.io/packagist/dt/laravelir/cart-.svg?style=flat-square)](https://packagist.org/packages/laravelir/cart-)
 
 
-# laravel Package
+# cart package
 
 A package for fun
 
@@ -15,16 +15,20 @@ A package for fun
 composer require vendor/package
 ```
 
-2. Open your config/app.php and add the following to the providers array:
+2. Open your config/app.php and add the following to the providers/aliases array:
 
 ```php
-Vendor\Package\Providers\PackageServiceProvider::class,
+Laravelir\Cart\Providers\CartServiceProvider::class,
 ```
 
-3. Run the command below to publish the package config file config/package.php:
+```php
+'Cart' => Laravelir\Cart\Facade\Cart::class,
+```
+
+3. Run the command below to install package:
 
 ```
-php artisan vendor:publish
+php artisan cart:install
 ```
 
 

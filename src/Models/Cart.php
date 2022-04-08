@@ -1,17 +1,17 @@
 <?php
 
-namespace Vendor\Package\Models;
+namespace Laravelir\Cart\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PackageModel extends Model
+class Cart extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'tables';
+    protected $table = 'carts';
 
     // protected $fillable = ['name'];
 
