@@ -2,7 +2,9 @@
 
 namespace Laravelir\Cart\Drivers;
 
-abstract class Driver
+use Laravelir\Cart\Contract\DriverContract;
+
+abstract class Driver implements DriverContract
 {
     protected $instance;
 
