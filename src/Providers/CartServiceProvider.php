@@ -2,11 +2,11 @@
 
 namespace Laravelir\Cart\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Laravelir\Cart\Facades\CartFacade;
-use Laravelir\Cart\Console\Commands\InstallCartCommand;
-use Laravelir\Cart\Console\Commands\InstallPackageCommand;
 use Laravelir\Cart\Facades\Cart;
+use Illuminate\Support\Facades\Route;
+use Laravelir\Cart\Facades\CartFacade;
+use Illuminate\Support\ServiceProvider;
+use Laravelir\Cart\Console\Commands\InstallPackageCommand;
 
 class CartServiceProvider extends ServiceProvider
 {
@@ -15,7 +15,7 @@ class CartServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . "/../../config/cart.php", 'cart');
 
-        // $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
         $this->registerFacades();
     }
@@ -29,8 +29,7 @@ class CartServiceProvider extends ServiceProvider
     {
 
         $this->registerCommands();
-        // $this->registerRoutes();
-        // $this->registerBladeDirectives();
+        $this->registerRoutes();
     }
 
     private function registerFacades()
@@ -57,37 +56,27 @@ class CartServiceProvider extends ServiceProvider
         ], 'cart-config');
     }
 
-    // private function registerRoutes()
-    // {
-    //     Route::group($this->routeConfiguration(), function () {
-    //         $this->loadRoutesFrom(__DIR__ . '/../../routes/dashboarder.php', 'dashboarder-routes');
-    //     });
-    // }
+    private function registerRoutes()
+    {
+        Route::group($this->routeConfiguration(), function () {
+            $this->loadRoutesFrom(__DIR__ . '/../../routes/cart.php', 'cart-routes');
+        });
+    }
 
-    // private function routeConfiguration()
-    // {
-    //     return [
-    //         'prefix' => config('dashboarder.routes.prefix'),
-    //         'middleware' => config('dashboarder.routes.middleware'),
-    //         'as' => 'dashboarder.'
-    //     ];
-    // }
+    private function routeConfiguration()
+    {
+        return [
+            'prefix' => config('cart.routes.prefix'),
+            'middleware' => config('cart.routes.middleware'),
+            'as' => 'cart.'
+        ];
+    }
 
-    // protected function publishMigrations()
-    // {
-    //     $this->publishes([
-    //         __DIR__ . '/../database/migrations/create_dashboarder_tables.stub' => database_path() . "/migrations/{$timestamp}_create_dashboarder_tables.php",
-    //     ], 'dashboarder-migrations');
-    // }
-
-    // protected function registerBladeDirectives()
-    // {
-    //     Blade::directive('format', function ($expression) {
-            // return "<?php echo ($expression)->format('m/d/Y H:i') ?/>";
-    //     });
-
-    //     Blade::directive('config', function ($key) {
-    //         return "<?php echo config('dashboarder.' . $key); ?/>";
-    //     });
-    // }
+    protected function publishMigrations()
+    {
+        $timestamp = now();
+        $this->publishes([
+            __DIR__ . '/../database/migrations/create_cart_tables.stub' => database_path() . "/migrations/{$timestamp}_create_cart_tables.php",
+        ], 'cart-migrations');
+    }
 }

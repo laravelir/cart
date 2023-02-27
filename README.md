@@ -5,14 +5,14 @@
 
 # cart package
 
-A package for fun
+a multi driver shopping cart package
 
 ### Installation
 
 1. Run the command below to add this package:
 
 ```
-composer require vendor/package
+composer require laravelir/cart
 ```
 
 2. Open your config/app.php and add the following to the providers/aliases array:
