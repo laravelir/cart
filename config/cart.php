@@ -12,6 +12,4 @@ return [
         'prefix' => 'cart',
         'middleware' => [],
     ],
-
-
 ];

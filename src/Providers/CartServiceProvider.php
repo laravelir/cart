@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Laravelir\Cart\Facades\CartFacade;
 use Illuminate\Support\ServiceProvider;
 use Laravelir\Cart\Console\Commands\InstallPackageCommand;
+use Laravelir\Cart\Services\CartService;
 
 class CartServiceProvider extends ServiceProvider
 {
@@ -35,7 +36,7 @@ class CartServiceProvider extends ServiceProvider
     private function registerFacades()
     {
         $this->app->bind('cart', function ($app) {
-            return new Cart();
+            return new CartService();
         });
     }
 

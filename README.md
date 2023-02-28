@@ -32,6 +32,34 @@ php artisan cart:install
 ```
 
 
+
+### Drivers
+
+Session - Cookie - Eloquent - Cache
+
+you can set your favorite driver in config file
+
+
+eloquent driver need to authenticated user for save user's id
+
+
+
+### How to use
+
+#### Methods
+
+$cart = resolve(Cart());
+$cart->all();
+$cart->add();
+$cart->has();
+$cart->update();
+$cart->count();
+$cart->delete();
+$cart->truncate();
+
+
+
+
 ## Testing
 
 ```bash

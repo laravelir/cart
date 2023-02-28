@@ -2,6 +2,7 @@
 
 namespace Laravelir\Cart\Services;
 
+use Laravelir\Cart\Drivers\CacheDriver;
 use Laravelir\Cart\Drivers\CookieDriver;
 use Laravelir\Cart\Drivers\EloquentDriver;
 use Laravelir\Cart\Drivers\SessionDriver;
@@ -14,6 +15,7 @@ class CartService
         'eloquent' => EloquentDriver::class,
         'session'  => SessionDriver::class,
         'cookie'   => CookieDriver::class,
+        'cache'  => CacheDriver::class,
     ];
 
     public function __construct()
@@ -23,17 +25,16 @@ class CartService
 
     public function setDriver()
     {
-        $driver = config('cart.driver') ?? 'eloquent';
+        $driver = config('cart.driver') ?? 'cookie';
 
         return array_key_exists($driver, $this->drivers) ?
-            resolve($this->drivers[$driver]) : resolve($this->drivers['eloquent']);
+            resolve($this->drivers[$driver]) : resolve($this->drivers['cookie']);
     }
 
     public function getDriver()
     {
         return [config('cart.driver') => $this->driver];
     }
-
 
     public function all()
     {
@@ -45,9 +46,9 @@ class CartService
         return $this->driver->get($item);
     }
 
-    public function store(array $data, array $options = [])
+    public function add(array $data, array $options = [])
     {
-        return $this->driver->store($data, $options);
+        return $this->driver->add($data, $options);
     }
 
     public function update($item, array $data, array $options = [])

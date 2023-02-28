@@ -1,2 +1,2 @@
-github: :package_name
-custom: ['url']
+github: :laravelir/cart
+custom: ['https://github.com/laravelir/cart']
