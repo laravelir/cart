@@ -8,14 +8,14 @@ abstract class Driver implements DriverContract
 {
     public $key;
 
+    protected $instance;
+
     public function __construct()
     {
         $this->key = config('cart.key');
     }
 
-    protected $instance;
-
-    public function instance(string $name)
+    public function instance(string $name): Driver
     {
         $this->instance = $name;
         return $this;

@@ -1,9 +1,9 @@
 - [![Starts](https://img.shields.io/github/stars/laravelir/cart?style=flat&logo=github)](https://github.com/laravelir/cart/forks)
 - [![Forks](https://img.shields.io/github/forks/laravelir/cart?style=flat&logo=github)](https://github.com/laravelir/cart/stargazers)
-  [![Total Downloads](https://img.shields.io/packagist/dt/laravelir/cart-.svg?style=flat-square)](https://packagist.org/packages/laravelir/cart-)
+- [![Total Downloads](https://img.shields.io/packagist/dt/laravelir/cart.svg?style=flat-square)](https://packagist.org/packages/laravelir/cart)
 
 
-# cart package
+# cart package (In Develop)
 
 a multi driver shopping cart package
 
@@ -39,25 +39,45 @@ Session - Cookie - Eloquent - Cache
 
 you can set your favorite driver in config file
 
-
 eloquent driver need to authenticated user for save user's id
 
 
 
 ### How to use
 
+add `HasCart` trait to User model
+
+this trait has one method:
+```php
+$this->cart(); // return cart 
+```
+
 #### Methods
 
+$user = auth()->user();
+
 $cart = resolve(Cart());
+
 $cart->all();
+
 $cart->add();
+
 $cart->has();
+
 $cart->update();
+
 $cart->count();
+
 $cart->delete();
+
 $cart->truncate();
 
+#### Helpers
+```php
+cart();
 
+cartItems();
+```
 
 
 ## Testing
@@ -80,8 +100,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
-- [All Contributors](../../contributors)
+- [miladimos](https://github.com/miladimos)
 
 ## License
 

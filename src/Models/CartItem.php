@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Laravelir\Cart\Traits\HasUUID;
 
-class Cart extends Model
+class CartItem extends Model
 {
     use HasUUID;
 
-    protected $table = 'carts';
+    protected $table = 'cart_items';
 
     // protected $fillable = ['name'];
 
@@ -19,10 +19,5 @@ class Cart extends Model
     public function cartable(): MorphTo
     {
         return $this->morphTo();
-    }
-
-    public function items()
-    {
-        return $this->hasMany(CartItem::class);
     }
 }

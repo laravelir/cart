@@ -11,7 +11,7 @@ class CartService
 {
     private $driver;
 
-    private $drivers = [
+    private array $drivers = [
         'eloquent' => EloquentDriver::class,
         'session'  => SessionDriver::class,
         'cookie'   => CookieDriver::class,
@@ -25,13 +25,13 @@ class CartService
 
     public function setDriver()
     {
-        $driver = config('cart.driver') ?? 'cookie';
+        $driver = config('cart.driver') ?? 'eloquent';
 
         return array_key_exists($driver, $this->drivers) ?
-            resolve($this->drivers[$driver]) : resolve($this->drivers['cookie']);
+            resolve($this->drivers[$driver]) : resolve($this->drivers['eloquent']);
     }
 
-    public function getDriver()
+    public function getDriver(): array
     {
         return [config('cart.driver') => $this->driver];
     }
