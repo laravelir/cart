@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SessionDriver extends Driver
 {
-
-
     private $session;
 
     private $cart;
@@ -23,7 +21,7 @@ class SessionDriver extends Driver
         return $this->cart;
     }
 
-    public function add(array $data)
+    public function add($data, $options = [])
     {
         $this->session->put('cart', $this->cart);
         return $this;
@@ -45,8 +43,7 @@ class SessionDriver extends Driver
         return $this->cart->where('id', $key);
     }
 
-
-    public function update($key)
+    public function update($item, $data, $options = [])
     {
         //
     }
@@ -65,6 +62,11 @@ class SessionDriver extends Driver
             return true;
         }
         return false;
+    }
+
+    public function truncate()
+    {
+        //
     }
 
     protected function withRelationIfExists($item)

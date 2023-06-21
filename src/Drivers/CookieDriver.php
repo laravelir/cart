@@ -15,14 +15,13 @@ class CookieDriver extends Driver
         // TODO: Implement get() method.
     }
 
-
     public function add($data, $options = [])
     {
         cookie()->queue('name', $data->toJson(), 60 * 24 * 7);
 
         $cart = collect(json_decode(cookie('name', true))) ?? collect([]);
     }
-    
+
     public function update($item, $data, $options = [])
     {
         // TODO: Implement update() method.
@@ -42,5 +41,4 @@ class CookieDriver extends Driver
     {
         // TODO: Implement truncate() method.
     }
-
 }

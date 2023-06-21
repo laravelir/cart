@@ -17,7 +17,7 @@ class EloquentDriver extends Driver
 
     public function all()
     {
-        return $this->model->l
+        return $this->model->all();
     }
 
     public function get($item)
