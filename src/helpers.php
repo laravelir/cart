@@ -9,3 +9,16 @@ if (!function_exists('cart')) {
     }
 }
 
+if (!function_exists('inCart')) {
+    function inCart()
+    {
+        return resolve(CartService::class);
+    }
+}
+
+if (!function_exists('cartItems')) {
+    function cartItems()
+    {
+        return resolve(CartService::class);
+    }
+}

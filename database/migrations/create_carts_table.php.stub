@@ -22,9 +22,11 @@ return new class extends Migration
         Schema::create('cart_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id');
-            $table->morphs('cartable');
-            $table->unsignedInteger('quantity')->default(1);
+            $table->morphs('cartable'); // product
+            $table->unsignedBigInteger('quantity')->default(1);
+            $table->unsignedBigInteger('price')->default(0);
             $table->boolean('for_next_order')->default(false); // if true item go to next order cart
+            $table->text('options')->nullable();
             $table->timestamps();
         });
     }

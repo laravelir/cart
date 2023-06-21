@@ -22,12 +22,12 @@ class EloquentDriver extends Driver
 
     public function get($item)
     {
-        // TODO: Implement get() method.
+        return $this->model->firstWhere('id', $key);
     }
 
     public function add($data, $options = [])
     {
-        // TODO: Implement add() method.
+        $cartItem = $this->model->create();
     }
 
     public function update($item, $data, $options = [])
@@ -37,16 +37,27 @@ class EloquentDriver extends Driver
 
     public function has($item)
     {
-        // TODO: Implement has() method.
+        return $this->model->where('product_id', $key->id)->where('product_type', get_class($key))->exists();
     }
 
     public function delete($item)
     {
-        // TODO: Implement delete() method.
+        if ($this->has($key)) {
+            $this->model = $this->model->filter(function ($item) use ($key) {
+                if ($key instanceof Model) {
+                    return ($item['product_id'] != $key->id) && ($item['product_type'] != get_class($key));
+                }
+                return $key != $item['id'];
+            });
+
+            $this->session->put($this->key, $this->model);
+            return true;
+        }
+        return false;
     }
 
     public function truncate()
     {
-        // TODO: Implement truncate() method.
+        return $this->model->truncate();
     }
 }
