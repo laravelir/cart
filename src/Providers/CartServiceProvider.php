@@ -28,8 +28,8 @@ class CartServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         $this->registerCommands();
+
         $this->registerRoutes();
     }
 
