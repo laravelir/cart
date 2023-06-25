@@ -2,7 +2,9 @@
 
 namespace Laravelir\Cart\Drivers;
 
+use Illuminate\Auth\AuthManager;
 use Laravelir\Cart\Contract\DriverContract;
+use Illuminate\Contracts\Events\Dispatcher;
 
 abstract class Driver implements DriverContract
 {
@@ -10,9 +12,15 @@ abstract class Driver implements DriverContract
 
     protected $instance;
 
-    public function __construct()
+    protected $events;
+
+    protected $authManager;
+
+    public function __construct(Dispatcher $events, AuthManager $authManager)
     {
         $this->key = config('cart.key');
+        $this->events = $events;
+        $this->authManager = $authManager;
     }
 
     public function instance(string $name): Driver

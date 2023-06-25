@@ -28,11 +28,13 @@ class EloquentDriver extends Driver
     public function add($data, $options = [])
     {
         $cartItem = $this->model->items()->create();
+        $this->events->dispatch('cart.added');
+        return $this;
     }
 
     public function update($item, $data, $options = [])
     {
-        // TODO: Implement update() method.
+        $this->model->where('id', $item)->update([]);
     }
 
     public function has($item)
@@ -42,18 +44,7 @@ class EloquentDriver extends Driver
 
     public function delete($item)
     {
-        if ($this->has($key)) {
-            $this->model = $this->model->items()->filter(function ($item) use ($key) {
-                if ($key instanceof Model) {
-                    return ($item['product_id'] != $key->id) && ($item['product_type'] != get_class($key));
-                }
-                return $key != $item['id'];
-            });
-
-            $this->session->put($this->key, $this->model);
-            return true;
-        }
-        return false;
+        return $this->model->where()->delete();
     }
 
     public function truncate()

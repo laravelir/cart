@@ -1,9 +1,3 @@
-https://github.com/darryldecode/laravelshoppingcart
-
-https://github.com/lukepolo/laracart/
-
-https://github.com/hardevine/LaravelShoppingcart
-
 https://github.com/JackieDo/Laravel-Cart
 
 https://github.com/bumbummen99/LaravelShoppingcart
