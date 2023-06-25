@@ -1,11 +1,5 @@
 https://github.com/JackieDo/Laravel-Cart
 
-https://github.com/bumbummen99/LaravelShoppingcart
-
-https://github.com/cartalyst
-
-https://github.com/Crinsane/LaravelShoppingcart
-
 https://adevait.com/laravel/create-shopping-cart-laravel-livewire
 
 https://www.itsolutionstuff.com/post/laravel-shopping-add-to-cart-with-ajax-exampleexample.html
