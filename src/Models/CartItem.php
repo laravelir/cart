@@ -2,9 +2,10 @@
 
 namespace Laravelir\Cart\Models;
 
+use Laravelir\Cart\Models\Cart;
+use Laravelir\Cart\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Laravelir\Cart\Traits\HasUUID;
 
 class CartItem extends Model
 {
@@ -15,6 +16,11 @@ class CartItem extends Model
     // protected $fillable = ['name'];
 
     protected $guarded = [];
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
 
     public function cartable(): MorphTo
     {
