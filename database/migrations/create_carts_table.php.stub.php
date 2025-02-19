@@ -31,4 +31,4 @@ return new class extends Migration
         Schema::dropIfExists('carts');
         Schema::dropIfExists('cart_items');
     }
-}
+};
