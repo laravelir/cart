@@ -2,36 +2,36 @@
 
 namespace Laravelir\Cart\Models;
 
+use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Laravelir\Cart\Traits\HasUUID;
 
 class Cart extends Model
 {
-    use HasUUID;
+    protected static function boot()
+    {
+        parent::boot();
 
-    protected $table = 'carts';
+        self::creating(function ($model) {
+            $model->uuid = (string)Uuid::uuid4();
+        });
+    }
+
+    protected $table = 'cartable_carts';
 
     // protected $fillable = ['name'];
 
     protected $guarded = [];
 
-
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
-
     public function cartable(): MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo(); // user
     }
 
     public function items()
     {
         return $this->hasMany(CartItem::class);
     }
-
 
     // public function order()
     // {

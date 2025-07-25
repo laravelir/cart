@@ -32,7 +32,7 @@ class SessionDriver extends Driver
         //
     }
 
-    public function has($key): bool
+    public function has($key)
     {
         //
     }

@@ -3,17 +3,22 @@
 namespace Laravelir\Cart\Models;
 
 use Laravelir\Cart\Models\Cart;
-use Laravelir\Cart\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Ramsey\Uuid\Uuid;
 
 class CartItem extends Model
 {
-    use HasUUID;
+    protected static function boot()
+    {
+        parent::boot();
 
-    protected $table = 'cart_items';
+        self::creating(function ($model) {
+            $model->uuid = (string)Uuid::uuid4();
+        });
+    }
 
-    // protected $fillable = ['name'];
+    protected $table = 'cartable_cart_items';
 
     protected $guarded = [];
 
@@ -24,6 +29,6 @@ class CartItem extends Model
 
     public function cartable(): MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo(); // product
     }
 }

@@ -2,18 +2,13 @@
 
 // config file for laravelir/cart
 return [
-    'key' => 'cart',
+    'key' => env('LARAVELIR_CART_KEY', 'key'),
 
     /**
      * drivers :
      * eloquent - cache - cookie - session
      */
-    'driver' => 'eloquent',
-
-    'routes' => [
-        'prefix' => 'cart',
-        'middleware' => [],
-    ],
+    'driver' => env('LARAVELIR_CART_DRIVER', 'eloquent'),
 
     /**
      * for cookies

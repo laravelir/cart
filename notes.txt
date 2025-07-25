@@ -12,3 +12,4 @@ https://blog.devops.dev/laravel-9-shopping-cart-tutorial-and-example-3deb84357da
 
 https://meritocracy.is/blog/2021/06/08/laravel-implementing-a-shopping-cart-for-your-website/
 
+https://github.com/binafy/laravel-cart

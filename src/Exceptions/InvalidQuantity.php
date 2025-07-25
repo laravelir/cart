@@ -2,6 +2,6 @@
 
 namespace Laravelir\Cart\Exceptions;
 
-class InvalidQuantity extends \Exception
-{
-}
+use Exception;
+
+class InvalidQuantity extends Exception {}

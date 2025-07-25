@@ -15,7 +15,6 @@ class InstallPackageCommand extends Command
     {
         $this->line("\t... Welcome To Package Installer ...");
 
-        //config
         if (File::exists(config_path('cart.php'))) {
             $confirm = $this->confirm("cart.php already exist. Do you want to overwrite?");
             if ($confirm) {

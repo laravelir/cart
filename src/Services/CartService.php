@@ -1,85 +1,73 @@
 <?php
 
-namespace App\Services;
+namespace Laravelir\Cart\Services;
 
-use App\Models\Product;
+use Laravelir\Cart\Drivers\CacheDriver;
+use Laravelir\Cart\Drivers\CookieDriver;
+use Laravelir\Cart\Drivers\EloquentDriver;
+use Laravelir\Cart\Drivers\SessionDriver;
 
 class CartService
 {
-    public static function all()
-    {
-        if (auth()->check()) {
-            return user()->cart->items()->latest()->get();
-        }
+    private $driver;
 
-        return [];
+    private array $drivers = [
+        'eloquent' => EloquentDriver::class,
+        'session'  => SessionDriver::class,
+        'cookie'   => CookieDriver::class,
+        'cache'  => CacheDriver::class,
+    ];
+
+    public function __construct()
+    {
+        $this->driver = $this->setDriver();
     }
 
-    public function add(array $item): bool
+    public function setDriver()
     {
-        $product = Product::find($item['product_id']);
-        if (! $product) {
-            return false;
-        }
+        $driver = config('cart.driver') ?? 'eloquent';
 
-        if ($cartItem = user()->cart->items->where('product_id', $product->id)->first()) {
-            $cartItem?->increment('quantity');
-        } else {
-
-            $result = user()->cart->items()->create([
-                'product_id' => $product->id,
-                'quantity' => $item['quantity'],
-            ]);
-
-            if (! $result) {
-                return false;
-            }
-        }
-
-        return true;
+        return array_key_exists($driver, $this->drivers) ?
+            resolve($this->drivers[$driver]) : resolve($this->drivers['eloquent']);
     }
 
-    public function delete($item_id): bool
+    public function getDriver(): array
     {
-        if ($item = user()->cart->items()->find($item_id)) {
-            $item->delete();
-
-            return true;
-        }
-
-        return false;
+        return [config('cart.driver') => $this->driver];
     }
 
-    public function truncate(): bool
+    public function all()
     {
-        if (! user()->cart->items()->truncate()) {
-            return false;
-        }
-
-        return true;
+        return $this->driver->all();
     }
 
-    public function incrementQuantity($item_id)
+    public function get($item)
     {
-        if ($item = user()->cart->items()->find($item_id)) {
-            $item->increment('quantity');
-
-            return true;
-        }
-
-        return false;
+        return $this->driver->get($item);
     }
 
-    public function decrementQuantity($item_id)
+    public function add(array $data, array $options = [])
     {
-        if ($item = user()->cart->items()->find($item_id)) {
-            if ($item->quantity > 1) {
-                $item->decrement('quantity');
-            }
+        return $this->driver->add($data, $options);
+    }
 
-            return true;
-        }
+    public function update($item, array $data, array $options = [])
+    {
+        return $this->driver->update($item, $data, $options);
+    }
 
-        return false;
+    public function has($item)
+    {
+        return $this->driver->has($item);
+    }
+
+    public function delete($item)
+    {
+        return $this->driver->delete($item);
+    }
+
+    public function truncate()
+    {
+        return $this->driver->truncate();
     }
 }
